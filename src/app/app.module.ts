@@ -93,6 +93,7 @@ import { ThumbnailDirective } from './components/side-nav-menu/insert-modal/thum
 import { RecentFilesComponent } from './components/recent-files/recent-files.component';
 import { SizeModalComponent } from './components/size-modal/size-modal.component';
 import { CommentStatusIconComponent } from './components/annotation-tools/comment-status-icon/comment-status-icon.component';
+import { PdfReaderComponent } from './pdf-reader/pdf-reader.component';
 
 
 
@@ -170,7 +171,8 @@ import { CommentStatusIconComponent } from './components/annotation-tools/commen
     RecentFilesComponent,
     HighlightPipe,
     SizeModalComponent,
-    CommentStatusIconComponent
+    CommentStatusIconComponent,
+    PdfReaderComponent
   ],
   imports: [
     BrowserModule,

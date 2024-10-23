@@ -70,7 +70,13 @@
         </div>
       </div>
 
-      <div *ngIf="!isEmpytyList || annotList['FoxitAnnots'].length !== 0; else emptyList" class="list">
+      <div
+        *ngIf="
+          !isEmpytyList || annotList['FoxitAnnots'].length !== 0;
+          else emptyList
+        "
+        class="list"
+      >
         <ng-container
           *ngFor="let group of list | keyvalue : sortOrder; trackBy: trackByFn"
         >
@@ -95,7 +101,7 @@
                               [subtype]="item.subtype"
                             ></rx-annotation-shape-icon>
                           </div>
-                          <div>
+                          <!-- <div>
                             <div class="author">{{ item.author }}</div>
                             <div class="comments-date-count">
                               <div class="date-and-time">
@@ -109,7 +115,7 @@
                             </div>
                             <p *ngIf="item.text">{{ item.text }}</p>
                             <p *ngIf="item.dimtext">{{ item.dimtext }}</p>
-                          </div>
+                          </div> -->
                           <div style="flex: 1"></div>
                           <div
                             class="statusMenuButton"
@@ -164,7 +170,7 @@
                               [subtype]="item.subtype"
                             ></rx-annotation-shape-icon>
                           </div>
-                          <div>
+                          <!-- <div>
                             <div class="author">{{ item.author }}</div>
                             <div class="comments-date-count">
                               <div class="date-and-time">
@@ -184,7 +190,7 @@
                               </div>
                             </div>
                             <p>{{ itemNote.value }}</p>
-                          </div>
+                          </div> -->
                         </div>
                         <div
                           *ngIf="!item.text && !item.dimtext && item.IsExpanded"
@@ -247,15 +253,10 @@
           </div>
         </ng-container>
 
-        <ng-container
-          *ngFor="let group of annotList | keyvalue"
-        >
+        <ng-container *ngFor="let group of annotList | keyvalue">
           <div class="list-item">
             <h4 class="date">{{ group.key }}</h4>
-            <div
-              *ngFor="let item of group.value"
-              class="note"
-            >
+            <div *ngFor="let item of group.value" class="note">
               <div [id]="'note-panel-' + item.getUniqueID()">
                 <div>
                   <div class="note-comment-list">

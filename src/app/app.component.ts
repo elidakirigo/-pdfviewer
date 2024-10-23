@@ -4,7 +4,6 @@ import { RxCoreService } from './services/rxcore.service';
 import { RXCore } from 'src/rxcore';
 import { NotificationService } from './components/notification/notification.service';
 import { MARKUP_TYPES } from 'src/rxcore/constants';
-import { AnnotationToolsService } from './components/annotation-tools/annotation-tools.service';
 import { RecentFilesService } from './components/recent-files/recent-files.service';
 import { Title } from '@angular/platform-browser';
 
@@ -24,9 +23,9 @@ export class AppComponent implements AfterViewInit {
   eventUploadFile: boolean = false;
   lists: any[] = [];
   state: any;
-  bfoxitreadycalled : boolean = false;
-  bguireadycalled : boolean = false;
-  binitfileopened : boolean = false;
+  bfoxitreadycalled: boolean = false;
+  bguireadycalled: boolean = false;
+  binitfileopened: boolean = false;
   timeoutId: any;
   pasteStyle: { [key: string]: string } = { display: 'none' };
 
@@ -36,7 +35,7 @@ export class AppComponent implements AfterViewInit {
     private readonly rxCoreService: RxCoreService,
     private readonly fileGaleryService: FileGaleryService,
     private readonly notificationService: NotificationService,
-    private titleService:Title) { }
+    private titleService: Title) { }
 
   ngOnInit() {
 
@@ -47,25 +46,20 @@ export class AppComponent implements AfterViewInit {
         this.eventUploadFile = false;
       }
     });
-    
   }
 
   ngAfterViewInit(): void {
-    
-    
-
     let JSNObj = [
       {
-          Command: "GetConfig",
-          UserName: "Demo",
-          DisplayName : "Demo User"
-          
+        Command: "GetConfig",
+        UserName: "Demo",
+        DisplayName: "Demo User"
       }
     ];
 
 
 
-    
+
     RXCore.setJSONConfiguration(JSNObj);
 
     RXCore.usePanToMarkup(true);
@@ -86,7 +80,7 @@ export class AppComponent implements AfterViewInit {
     RXCore.useFixedScale(false);
 
 
-    RXCore.initialize({ offsetWidth: 0, offsetHeight: 0});
+    RXCore.initialize({ offsetWidth: 0, offsetHeight: 0 });
 
 
     RXCore.onGuiReady((initialDoc: any) => {
@@ -98,47 +92,31 @@ export class AppComponent implements AfterViewInit {
       console.log(`Read Only Mode - ${RXCore.getReadOnly()}.`);
 
       RXCore.setLayout(0, 0, false);
-      RXCore.doResize(false,0, 0);/*added to set correct canvas size on startup */
-
-
+      RXCore.doResize(false, 0, 0);/*added to set correct canvas size on startup */
       RXCore.setdisplayBackground(document.documentElement.style.getPropertyValue("--background") || '#D6DADC');
       RXCore.setrxprintdiv(document.getElementById('printdiv'));
 
-
-      
-
-      if(this.bfoxitreadycalled){
-        this.openInitFile(initialDoc);  
+      if (this.bfoxitreadycalled) {
+        this.openInitFile(initialDoc);
       }
       /*if(this.bguireadycalled){
         return;
       }*/
-
-      
-
     });
 
     RXCore.onGuiFoxitReady((initialDoc: any) => {
 
-
       this.bfoxitreadycalled = true;
 
-      
-      if(this.bguireadycalled){
+      if (this.bguireadycalled) {
         this.openInitFile(initialDoc);
       }
-
-
-
       this.rxCoreService.guiFoxitReady.next();
-
-
-
     });
 
     RXCore.onGuiState((state: any) => {
-      //console.log('RxCore GUI_State:', state);
-      //console.log('RxCore GUI_State:', state.source);
+      console.log('RxCore GUI_State:', state);
+      console.log('RxCore GUI_State:', state.source);
 
       this.state = state;
       this.rxCoreService.setNumOpenFiles(state?.numOpenFiles);
@@ -146,27 +124,24 @@ export class AppComponent implements AfterViewInit {
 
       if (this.eventUploadFile) this.fileGaleryService.sendStatusActiveDocument('awaitingSetActiveDocument');
       if ((state.source === 'forcepagesState' && state.isPDF) || (state.source === 'setActiveDocument' && !state.isPDF)) {
-        
+
         this.fileGaleryService.sendStatusActiveDocument(state.source);
         this.eventUploadFile = false;
       }
 
-      if(state.isPDF && state.numpages > 1){
+      if (state.isPDF && state.numpages > 1) {
         RXCore.usePanToMarkup(true);
-      }else{
+      } else {
         RXCore.usePanToMarkup(false);
       }
-
-      //
-
     });
 
     RXCore.onGuiPage((state) => {
-     this.rxCoreService.guiPage.next(state);
+      this.rxCoreService.guiPage.next(state);
     });
 
     RXCore.onGuiFileLoadComplete(() => {
-      
+
 
       let FileInfo = RXCore.getCurrentFileInfo();
 
@@ -175,14 +150,10 @@ export class AppComponent implements AfterViewInit {
       //this.titleService.setTitle(this.title);
 
       this.recentfilesService.addRecentFile(FileInfo);
-      
+
       this.rxCoreService.guiFileLoadComplete.next();
-
-      
-      
-
     });
-    
+
     RXCore.onGuiScaleListLoadComplete(() => {
       this.rxCoreService.guiScaleListLoadComplete.next();
     });
@@ -275,7 +246,7 @@ export class AppComponent implements AfterViewInit {
     });
 
     RXCore.onGuiMarkupSave(() => {
-      this.notificationService.notification({message: 'Markups have been successfully saved.', type: 'success'});
+      this.notificationService.notification({ message: 'Markups have been successfully saved.', type: 'success' });
     });
 
     RXCore.onGuiResize(() => {
@@ -287,33 +258,33 @@ export class AppComponent implements AfterViewInit {
     });
 
     RXCore.onGuiCompareMeasure((distance, angle, offset, pagewidth, scaleinfo) => {
-      this.rxCoreService.guiOnCompareMeasure.next({distance, angle, offset, pagewidth, scaleinfo});
+      this.rxCoreService.guiOnCompareMeasure.next({ distance, angle, offset, pagewidth, scaleinfo });
     });
 
     RXCore.onGuiMarkupChanged((annotation, operation) => {
-      this.rxCoreService.guiOnMarkupChanged.next({annotation, operation});
+      this.rxCoreService.guiOnMarkupChanged.next({ annotation, operation });
     });
 
-    RXCore.onGuiPanUpdated((sx, sy, pagerect) => { 
-      this.rxCoreService.guiOnPanUpdated.next({sx, sy, pagerect});
+    RXCore.onGuiPanUpdated((sx, sy, pagerect) => {
+      this.rxCoreService.guiOnPanUpdated.next({ sx, sy, pagerect });
     });
 
-    RXCore.onGuiZoomUpdate((zoomparams, type) => { 
-      this.rxCoreService.guiOnZoomUpdate.next({zoomparams, type});
+    RXCore.onGuiZoomUpdate((zoomparams, type) => {
+      this.rxCoreService.guiOnZoomUpdate.next({ zoomparams, type });
     });
 
 
-  
+
 
   }
 
 
 
-  openInitFile(initialDoc){
-    if(initialDoc.open && !this.binitfileopened){
+  openInitFile(initialDoc) {
+    if (initialDoc.open && !this.binitfileopened) {
 
 
-      if(initialDoc.openfileobj != null){
+      if (initialDoc.openfileobj != null) {
 
         this.binitfileopened = true;
         RXCore.openFile(initialDoc.openfileobj);
@@ -328,7 +299,7 @@ export class AppComponent implements AfterViewInit {
     this.fileGaleryService.openModal();
   }
 
-  handleLoginClick(){
+  handleLoginClick() {
     console.log("log in pressed");
   }
 

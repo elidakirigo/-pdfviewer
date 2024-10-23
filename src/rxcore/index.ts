@@ -23,7 +23,6 @@ export class RXCore {
     public static disablewelcome(onoff: boolean): void {
         RxCore.disablewelcome(onoff);
     }
-    
 
     public static overrideLinewidth(onoff:boolean , thickness: number): void {
         RxCore.overrideLinewidth(onoff, thickness);
@@ -45,12 +44,9 @@ export class RXCore {
         RxCore.openFile(fileUrl);
     }*/
 
-    
-
     public static setThumbnailSize(w:number, h:number): void {
         RxCore.setThumbnailSize(w,h);
-    }
-    
+    } 
 
     public static scaleOnResize(onoff: boolean): void {
         RxCore.scaleOnResize(onoff);
@@ -190,10 +186,10 @@ export class RXCore {
     }
 
     public static forceUniqueMarkup(onoff: boolean): void {
-        RxCore.forceUniqueMarkup(onoff);    
+        RxCore.forceUniqueMarkup(onoff);
     }
 
-    
+
 
     public static getSelectedMarkup(): IMarkup {
         return RxCore.getSelectedMarkup();
@@ -211,7 +207,7 @@ export class RXCore {
         return RxCore.setLayout(width, height, absolute);
     }
 
-    
+
 
     public static setText(text: string): void {
         RxCore.GUI_TextInput.setText(text);
@@ -462,7 +458,7 @@ export class RXCore {
     public static usePanToMarkup(onoff: boolean): void {
         RxCore.usePanToMarkup(onoff);
     }
-    
+
 
 
     public static textSelect(onoff: boolean): void {
@@ -647,7 +643,7 @@ export class RXCore {
     public static restoreDefault(): void{
         RxCore.restoreDefault();
     }
-    
+
     public static restrictPan(onoff): void {
         RxCore.restrictPan(onoff);
     }
@@ -666,7 +662,7 @@ export class RXCore {
     }
 
 
-    
+
 
     public static get markupChanged(): boolean {
         return RxCore.markupChanged();
@@ -935,7 +931,7 @@ export class RXCore {
     public static onGuiGetSignatureComplete(callback: (signature: ISignatureData) => void): void {
         RxCore.GUI_getsignatureComplete.connect(callback);
     }
-    
+
     public static onGuiPanUpdated(callback: (sx: number, sy: number, pagerect: any) => void): void {
         RxCore.GUI_PanUpdated.connect(callback);
     }
@@ -947,7 +943,7 @@ export class RXCore {
     public static onGuiMarkupMeasureRealTimeData(callback: Function): void {
         RxCore.GUI_MarkupMeasureRealTimeData.connect(callback);
     }
-    
+
     public static setUnit(unit: number): void {
         RxCore.setUnit(unit);
     }
@@ -965,23 +961,23 @@ export class RXCore {
 	public static elementImperialUnit(unit: string): void {
         RxCore.elementImperialUnit(unit);
     }
-	public static setDimPrecisionForPage(value : number ): any {        
+	public static setDimPrecisionForPage(value : number ): any {
         RxCore.setDimPrecisionForPage(value);
     }
- 
-    public static setElementDimPrecision(value: number): any {        
+
+    public static setElementDimPrecision(value: number): any {
         RxCore.setElementDimPrecision(value);
-    } 
+    }
 	public static getCurrentPageScaleValue(): any {
         return RxCore.getCurrentPageScaleValue();
     }
 
-    
+
     public static setElementUnit(value: number): void {
         return RxCore.setElementUnit(value);
     }
 
-    
+
 
 
     public static metricUnit(val: string): void {
@@ -995,34 +991,34 @@ export class RXCore {
     public static calibrate(selected: boolean): void {
         RxCore.calibrate(selected);
     }
-    
+
     public static onGuiCalibratediag(callback: Function): void {
         // RxCore.GUI_MarkupIndex.connect(callback);
         RxCore.GUI_Calibratediag.connect(callback);
     }
 
-    public static getCalibrateGUI(): any {        
+    public static getCalibrateGUI(): any {
         return RxCore.GUI_Calibratediag;
     }
 
-    public static setdimPrecision(value): any {        
+    public static setdimPrecision(value): any {
         RxCore.setdimPrecision(value);
     }
 
     public static markupAreaRect(onoff: boolean): void {
         RxCore.markupAreaRect(onoff);
     }
- 
+
     public static insertPoint(): void {
         RxCore.insertPoint();
     }
- 
+
     public static deletePoint(): void {
         RxCore.deletePoint();
-    } 
+    }
     public static markupRectToAreaSwitch(markup: IMarkup): void {
         RxCore.markupRectToAreaSwitch(markup);
-    } 
+    }
 
     public static getCurrentPageScaleLabel(): string {
         return RxCore.getCurrentPageScaleLabel();
@@ -1030,15 +1026,15 @@ export class RXCore {
 
     public static setScaleLabel(label: string): void {
         RxCore.setScaleLabel(label);
-    } 
-    
+    }
+
     public static setElementScaleLabel(label: string): void {
         RxCore.setElementScaleLabel(label);
-    } 
-    
+    }
+
     public static resetToDefaultScaleValueForMarkup(scaleLabel: string): void {
         RxCore.resetToDefaultScaleValueForMarkup(scaleLabel);
-    } 
+    }
 
     public static printDoc(): any {
         return RxCore.printDoc();
@@ -1050,8 +1046,8 @@ export class RXCore {
 
     public static updateScaleList(scalesOptions: any[]): void {
         RxCore.updateScaleList(scalesOptions);
-    }    
-    
+    }
+
     public static onGuiScaleListLoadComplete(callback: Function): void {
         RxCore.GUI_scaleListLoadComplete.connect(callback);
     }

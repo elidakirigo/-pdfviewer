@@ -1,0 +1,19 @@
+<div id="pdf-container" style="position: relative;"></div>
+
+<div *ngIf="annotations.length > 0; else noComments">
+  <h3>PDF Comments</h3>
+  <ul>
+    <li
+      *ngFor="let annotation of annotations"
+      id="comment-{{ annotation.id }}"
+      (click)="onCommentClick(annotation)"
+      class="comment-item"
+    >
+      <strong>Page {{ annotation.pageIndex + 1 }}:</strong> {{ annotation.contents }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #noComments>
+  <p>No comments found in the PDF.</p>
+</ng-template>
